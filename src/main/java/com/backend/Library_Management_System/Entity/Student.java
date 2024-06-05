@@ -1,6 +1,7 @@
 package com.backend.Library_Management_System.Entity;
 
 import com.backend.Library_Management_System.Enum.Department;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,8 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Student {
 
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -21,14 +22,13 @@ public class Student {
     private String name;
 
     private int age;
-
     @Enumerated(EnumType.STRING)
-    private Department department;
+    Department department;
 
+    @Column(unique = true)
     private String email;
 
-    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
-    // All the CRUD operation applied on student class will be
-    // automatically called in librayCard class using CascadeType.ALL
-     LibraryCard card;
+    @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
+    @JsonIgnore
+    LibraryCard card;
 }
