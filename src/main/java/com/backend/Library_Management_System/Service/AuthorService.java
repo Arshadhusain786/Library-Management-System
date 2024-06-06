@@ -23,5 +23,17 @@ public class AuthorService
 
   }
 
+    public String getMobileNumberById(int id) throws Exception {
+        Author author;
+        try {
+            author = authorRepository.findById(id).get();
+            return author.getMobNo();
+        }
+        catch (Exception e)
+        {
+            throw new Exception("Author Does not Exist");
+        }
+    }
+
 
 }

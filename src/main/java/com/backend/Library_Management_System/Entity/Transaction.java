@@ -34,6 +34,8 @@ public class Transaction {
 
     private boolean isIssuedOperation;
 
+    private String message;
+
     @ManyToOne
     @JoinColumn
     @JsonIgnore

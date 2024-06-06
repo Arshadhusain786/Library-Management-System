@@ -2,6 +2,7 @@ package com.backend.Library_Management_System.Service;
 
 import com.backend.Library_Management_System.DTO.StudentRequestDto;
 import com.backend.Library_Management_System.DTO.StudentResponseDto;
+import com.backend.Library_Management_System.DTO.StudentUpdateAgeRequestDto;
 import com.backend.Library_Management_System.DTO.StudentUpdateEmailRequestDto;
 import com.backend.Library_Management_System.Entity.LibraryCard;
 import com.backend.Library_Management_System.Entity.Student;
@@ -82,6 +83,35 @@ public class StudentService
 
         return studentResponseDto;
 
+
+    }
+    public String updateStudentAge(StudentUpdateAgeRequestDto studentUpdateAgeRequestDto) throws Exception {
+
+//        Student student = studentRepository.findById(studentUpdateAgeRequestDto.getId()).orElse(null);
+//        if(student==null)
+//        {
+//            throw new Exception("Student does not exist");
+//        }
+//        else {
+//            student.setAge(studentUpdateAgeRequestDto.getAge());
+//
+//            studentRepository.save(student);
+//            return "Student Age Updated Successfully";
+//        }
+
+        Student student;
+
+        try {
+            student = studentRepository.findById(studentUpdateAgeRequestDto.getId()).get();
+        }
+        catch (Exception e)
+        {
+            throw new Exception("Student Doesn't Exist");
+        }
+        student.setAge(studentUpdateAgeRequestDto.getAge());
+
+        studentRepository.save(student);
+        return "Student Age Updated Successfully";
 
     }
 }

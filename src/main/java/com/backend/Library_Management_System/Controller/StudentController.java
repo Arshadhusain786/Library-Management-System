@@ -2,10 +2,13 @@ package com.backend.Library_Management_System.Controller;
 
 import com.backend.Library_Management_System.DTO.StudentRequestDto;
 import com.backend.Library_Management_System.DTO.StudentResponseDto;
+import com.backend.Library_Management_System.DTO.StudentUpdateAgeRequestDto;
 import com.backend.Library_Management_System.DTO.StudentUpdateEmailRequestDto;
 import com.backend.Library_Management_System.Entity.Student;
 import com.backend.Library_Management_System.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,5 +45,19 @@ public class StudentController {
     {
         return studentService.updateEmail(studentUpdateEmailRequestDto);
     }
+    @PutMapping("/update_age_of_student")
+    public ResponseEntity updateStudentAge(@RequestBody StudentUpdateAgeRequestDto studentUpdateAgeRequestDto)  {
+
+        //return studentService.updateStudentAge(studentUpdateAgeRequestDto);
+        try {
+            studentService.updateStudentAge(studentUpdateAgeRequestDto);
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity<>("Student Age Updated",HttpStatus.CREATED);
+    }
+
 
 }
