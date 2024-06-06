@@ -126,7 +126,7 @@ public class TransactionService
 
     }
     public String getAllTnxs(int cardNo){
-        List<Transaction> transactionList= transactionRepository.getAllSucessfullTnxsWithCardNo(cardNo);
+        List<Transaction> transactionList= transactionRepository.getAllSuccessfullTrnxsWithCardNo(cardNo);
         String ans= "";
 
         for(Transaction transaction: transactionList )
